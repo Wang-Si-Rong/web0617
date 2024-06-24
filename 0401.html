@@ -1,0 +1,59 @@
+<html>
+<head>
+  <script>
+    function get(id) {
+      return document.getElementById(id);
+    }
+    function start_timer() {
+      time=0;
+      /*setTimeout (function(){
+        alert("時間到");
+      },3000);*/
+      setInterval(function(){
+        time=time+1;
+        sec=Math.floor(time/100);
+        time=time%100;
+        time_str="";
+        if(sec<10) {
+          time_str="0"+sec;
+        } else {
+          time_str=sec;
+        }
+        
+        get("time").innerHTML=time;
+      },1000);
+    }
+    function stop_timer(){
+      clearInterval(t1);
+
+      function lottery() {
+        var t1=setInterval(function(){
+        get("bignum").innerHTML=getRnd(1,99);
+        },10);
+        setTimeout(clearInterval,3000,t1);
+      }
+      function dice(x) {
+          var pics=["scissors","stone","paper"];
+          var y=getRnd(0,2);
+          get("host").src="pic/"+pics[y]+".png";
+          if((x==0 &&y==2) || (x==1 && y==0) || (x==2 && y==1)) {
+            get("msg").innerHTML
+          }
+      }   
+    }
+  </script>
+  <style>
+    #bignum {
+      font-size:120pt;
+    }
+  </style>
+</head>
+  <body>
+    <div>時間:<span id="time">00'00</span></div>
+    <button onclick="start_timer();">開始計時</button> 
+    <button onclick="stop_timer();">停止計時</button> 
+    <button onclick="lottery();">樂透</button>
+    <div id="bignum">99</div>
+    <img id="dice" src="pic/0.png" onclick="dice(this);">
+  </body>
+</html>  

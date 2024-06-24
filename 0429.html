@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <style>
+      #universe {
+        width:600px;
+        height:600px;
+        background:url("bg_stars.jpg");
+        animation:bd_move 2s linear infinite;
+        position:relative;
+      }
+      @keyframes bg_move {
+        0%{background-position-y:0px;}
+        100%{background-position-y:213px;}
+      }
+      #ship {
+        width:60px;
+        height:60px;
+        position:absolute;
+        left:270px;
+        top:540px;
+      }
+      .ufo {
+        width:60px;
+        height:60px;
+        position:absolute;
+      }
+    </style>
+    <script>
+      function get(id){
+        return document.getElementById(id);
+      }
+      function gets(qs) {
+        return Array.from(document.querySelectorAll(qs));
+      }
+      function gameInit() {
+         mydir={"ArrowDown":0,"ArrowLeft":0,"ArrrowRight":0,"ArroeUp":0};
+         ship={w:60,h:60,x:270,y:540};
+        setIterval(ship_move,10);
+      }
+      function mykeydown(ev) {
+        ev.preventDefault();
+        mydir[keys[ev.key]]=1;
+      }
+       function mykeyup(ev) {
+        ev.preventDefault();
+        mydir[keys[ev.key]]=0;
+      }
+      function ship_move() {
+        if(mydir["ArrowDown"] && ship.y +ship.h < 600) {
+          ship.y++;
+        } else if(mydir["ArrowLeft"] && ship.x > 0) {
+          ship.x--;
+        } else if(mydir["ArrowRight"] && ship.x +ship.w <600) {
+          ship.x++;
+        } else if(mydir["ArrowUp"] && ship.y > 300) {
+          ship.y--;
+        }
+        get("ship").style.left=ship.x+"px";
+        get("ship").style.top=ship.y+"px";
+        
+      }
+      function ufo_create() {
+        var u=document.createElement("img");
+        u.src="ufo.png";
+        u.className="ufo";
+        u.pos={x:getRnd(0,540),y:0};
+        u.style.left=u.pos.x+"px";
+        u.move=setIterval(ufo_move,500,u);
+        get("universe").appendChild(u);
+      }
+      function die(o) {
+        clearInterval(o.move);
+        o.remove();
+      }
+      function ufo_move(u) {
+        if(u.pos.y>540) return die(u);
+        u.pos.y+=getRnd(5,10);
+        u.style.top=u.pos.y+"px";
+      }
+      function shoot() {
+        var b=document.createElement("div");
+        b.className="bullet";
+        b.pos={x:ship.x+30,y:ship.y};
+        b.style.left=b.pos.x+"px";
+        b.move=setIterval(bullet_move,10,b);
+        get("universe").appendChild(b);
+      }
+      function bullet_create() {
+        var b=document.createElement("div");
+        b.className="bullet";
+        b.pos={x:ship.x+30,y:ship.y};
+        b.style.left=b.pos.x+"px";
+        b.move=setIterval(bullet_move,10,b);
+        get("universe").appendChild(b);
+      }
+      function bullet_move(b) {
+        if(b.pos.y<0) return die(b);
+        b.pos.y--;
+        b.style.top=b.pos.y+"px";
+        var hit=gets(".ufo").filter(function(u){
+          return (u.pos.x<this.pos.x)
+        })
+      }
+    </script>
+  </head>
+  <body onload="gameInit();" onkeydown="mykeydown(event);" onkeyup="mykeyup(event);">
+    <div id="universe">
+      <img id="ship" src="8652737_nftrocket_digital_rocket_system_security_icon.png">
+    </div>
+  </body>
+</html>

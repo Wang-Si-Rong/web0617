@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSS-0318</title>
+  <!-- /*scale倍率 rotate旋轉 translate位置 transition過程:ex:transition:transform 1s 多個加逗點 #d1:hover{} 滑鼠碰到做變化 多個間加空格* -->
+  <!--font-size:文字大小 color顏色 font-family字形 font-weight粗細 text-shadow陰影 先顏色在距離ex:text-shadow:gray 
+ 5px -3px 10px(暈) -text-align:center;文字置中 box-shadow:red 0px 0px 10px盒子陰影*-->
+  <style>
+    #d1{
+        width:100px;
+        height:50px;
+        background:lightblue;
+        position:relative;
+        top:10px;
+        left:10px;
+        transition:transform 1s,background 2s;
+    }
+    #d1:hover {
+        background:lightskyblue;
+        transform:rotate(-45deg) scale(0.5,3);
+    }
+    #d2{
+      position:relative;
+      top:100px;
+      left:10px;
+      font-size:100px;
+      font-family:consolas,標楷體;
+      font-weight:bold;
+      color:black;
+      text-
+      border-radius:50;
+      text-align:center;
+      font-size:48pt
+      border:1px solid gray;
+    }
+ </style>
+</head>
+<body>
+  <div id="d1"></div>
+  <div id="d2">hellow 你好</div>
+
+  
+</body>
+</html>

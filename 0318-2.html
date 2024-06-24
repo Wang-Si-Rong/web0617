@@ -1,0 +1,23 @@
+<html>
+<head>
+  <style>
+    #msg{
+      font-size:48pt;
+      color:black;
+    }
+  </style>
+  <script>
+    /*alert億載入就有跳出來 所以用function較好 這是函示*/
+  function sayhellow(){
+    alert("你好");//prompt是輸入框//confirm是確認框
+    ans=prompt("你是誰?");
+    //elm=document.getElementById("msg").innerHTML="你好";
+    //elm.innerHTML="你好";
+  }
+  </script>
+</head>  
+<body>
+  <button onclick="sayhellow();">哈囉</button>
+  <div id="msg"></div>                                   
+</body>
+</html>
